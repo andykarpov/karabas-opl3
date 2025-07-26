@@ -2,9 +2,9 @@
 
 Simple OPL3 sound card for ZX Spectrum (NemoBus).
 
-[![photo](docs/karabas-opl3-revA-top.small.webp)](docs/karabas-opl3-revA-top.webp?raw=true)
+[![photo](docs/karabas-opl3-top.png)](docs/karabas-opl3-top.png?raw=true)
 
-[![photo](docs/karabas-opl3-revA-bottom.small.webp)](docs/karabas-opl3-revA-bottom.webp?raw=true)
+[![photo](docs/karabas-opl3-bottom.png)](docs/karabas-opl3-bottom.png?raw=true)
 
 ### Tech specs
 
