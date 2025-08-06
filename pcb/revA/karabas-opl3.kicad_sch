@@ -15460,7 +15460,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "my:Oscillator_SMD_7050_7.0x5.0mm"
+		(property "Footprint" "footprints:Oscillator_SMD_7050_7.0x5.0mm_mixed_3225"
 			(at 207.01 158.75 0)
 			(effects
 				(font
