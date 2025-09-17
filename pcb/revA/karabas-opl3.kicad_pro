@@ -262,48 +262,7 @@
     "equivalence_files": []
   },
   "erc": {
-    "erc_exclusions": [
-      [
-        "lib_symbol_issues|1270000|2451100|34c165b3-2bbf-47d6-ad80-291b1004019e|00000000-0000-0000-0000-000000000000|||",
-        ""
-      ],
-      [
-        "lib_symbol_issues|1638300|2082800|1b6cfd74-e4ca-405b-8d71-145de972ccd4|00000000-0000-0000-0000-000000000000|||",
-        ""
-      ],
-      [
-        "lib_symbol_issues|2870200|1524000|00000000-0000-0000-0000-00005f9adf85|00000000-0000-0000-0000-000000000000|||",
-        ""
-      ],
-      [
-        "lib_symbol_issues|2870200|876300|00000000-0000-0000-0000-00005f9ad482|00000000-0000-0000-0000-000000000000|||",
-        ""
-      ],
-      [
-        "lib_symbol_issues|4521200|1638300|b249102e-5c1a-4652-ab3b-516010f4ecad|00000000-0000-0000-0000-000000000000|||",
-        ""
-      ],
-      [
-        "multiple_net_names|1282700|2438400|a465cbed-2da6-4cb9-898e-073a0be867db|5550e320-35c2-4b77-8a2c-ffb71070c364|/eff1afb7-47ba-46af-a815-4a07fb8d674b|/eff1afb7-47ba-46af-a815-4a07fb8d674b|/eff1afb7-47ba-46af-a815-4a07fb8d674b",
-        ""
-      ],
-      [
-        "multiple_net_names|2044700|2184400|b639797b-2252-4210-b386-96b83ee74525|ddad91eb-93e6-44f4-a5e0-d5f89b8d9fa8|/eff1afb7-47ba-46af-a815-4a07fb8d674b|/eff1afb7-47ba-46af-a815-4a07fb8d674b|/eff1afb7-47ba-46af-a815-4a07fb8d674b",
-        ""
-      ],
-      [
-        "multiple_net_names|2044700|2184400|f3dc702d-d614-46cd-94c2-002711bca28f|ddad91eb-93e6-44f4-a5e0-d5f89b8d9fa8|/eff1afb7-47ba-46af-a815-4a07fb8d674b|/eff1afb7-47ba-46af-a815-4a07fb8d674b|/eff1afb7-47ba-46af-a815-4a07fb8d674b",
-        ""
-      ],
-      [
-        "multiple_net_names|3314700|571500|f3dc702d-d614-46cd-94c2-002711bca28f|d366c762-cd92-4c6d-8eec-440b3f24c893|/eff1afb7-47ba-46af-a815-4a07fb8d674b|/eff1afb7-47ba-46af-a815-4a07fb8d674b|/eff1afb7-47ba-46af-a815-4a07fb8d674b",
-        ""
-      ],
-      [
-        "multiple_net_names|4533900|1625600|d36a36bd-2b3c-4708-b22f-26cda2290d2c|95395255-e81d-4578-860b-1bce96bb626b|/eff1afb7-47ba-46af-a815-4a07fb8d674b|/eff1afb7-47ba-46af-a815-4a07fb8d674b|/eff1afb7-47ba-46af-a815-4a07fb8d674b",
-        ""
-      ]
-    ],
+    "erc_exclusions": [],
     "meta": {
       "version": 0
     },
@@ -518,6 +477,7 @@
       "single_global_label": "ignore",
       "unannotated": "error",
       "unconnected_wire_endpoint": "warning",
+      "undefined_netclass": "error",
       "unit_value_mismatch": "error",
       "unresolved_variable": "error",
       "wire_dangling": "error"

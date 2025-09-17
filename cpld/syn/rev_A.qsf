@@ -72,7 +72,6 @@ set_location_assignment PIN_31 -to a[6]
 set_location_assignment PIN_32 -to a[5]
 set_location_assignment PIN_35 -to a[4]
 set_location_assignment PIN_36 -to a[9]
-set_location_assignment PIN_40 -to n_reset
 set_location_assignment PIN_41 -to n_iorq
 set_location_assignment PIN_44 -to n_m1
 set_location_assignment PIN_45 -to a[8]
@@ -97,3 +96,7 @@ set_location_assignment PIN_14 -to ym_smp[0]
 set_location_assignment PIN_85 -to dac_std
 set_location_assignment PIN_71 -to led[0]
 set_location_assignment PIN_69 -to led[1]
+set_location_assignment PIN_25 -to a[3]
+set_location_assignment PIN_40 -to n_rst
+set_instance_assignment -name GLOBAL_SIGNAL "GLOBAL CLOCK" -to clk28
+set_instance_assignment -name GLOBAL_SIGNAL "GLOBAL CLOCK" -to ym_dclk
