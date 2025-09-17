@@ -28,7 +28,7 @@ incremental_db/
 *.srf
 cpld/tb/work/
 cpld/tb/*.vcd
-cpld/tb/*.gtkw
+#cpld/tb/*.gtkw
 cpld/tb/*_pwl.txt
 cpld/tb/*.raw
 cpld/tb/*.net
