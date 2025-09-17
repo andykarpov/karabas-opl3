@@ -1,4 +1,4 @@
-REV = A1
+REV = A
 REVISION = rev_${REV}
 
 .PHONY: build program clean

@@ -14,7 +14,7 @@ pcb/rev*~*/
 ## Quartus
 db/
 incremental_db/
-output/
+#output/
 *.dpf
 *.cdf
 *.qws

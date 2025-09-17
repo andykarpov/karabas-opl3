@@ -99,4 +99,3 @@ set_location_assignment PIN_69 -to led[1]
 set_location_assignment PIN_25 -to a[3]
 set_location_assignment PIN_40 -to n_rst
 set_instance_assignment -name GLOBAL_SIGNAL "GLOBAL CLOCK" -to clk28
-set_instance_assignment -name GLOBAL_SIGNAL "GLOBAL CLOCK" -to ym_dclk

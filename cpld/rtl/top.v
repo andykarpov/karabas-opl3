@@ -86,12 +86,24 @@ assign n_iorqge = (allow_invert_iorqe) ? n_m1 & port_cs : ~(n_m1 & port_cs);
 // regster addresses
 assign ym_a[1:0] = a[1:0];
 
+// sample ym data in main clock domain
+reg [2:0] ym_dclk_r = 0;
+wire ym_dclk_strobe, ym_dclk_strobe_n;
+always @(posedge clk14)
+begin
+	ym_dclk_r <= {ym_dclk_r[1:0], ym_dclk};
+end
+
+assign ym_dclk_strobe = (ym_dclk_r[2:1] == 2'b01) ? 1'b1 : 1'b0; // rising edge 
+assign ym_dclk_strobe_n = (ym_dclk_r[2:1] == 2'b10) ? 1'b1 : 1'b0; // falling edge
+
 // convert data stream for i2s from lsb-first to msb-first
 reg [1:0] prev_smp;
 reg [15:0] data;
 reg [15:0] serial;
 reg [1:0] latch;
-always @(posedge ym_dclk) begin
+always @(posedge clk14) begin
+  if (ym_dclk_strobe) begin
 	 latch <= 2'b00;
     prev_smp <= ym_smp;
 	 serial <= {ym_data, serial[15:1]};
@@ -105,6 +117,7 @@ always @(posedge ym_dclk) begin
 		data <= serial; // todo minus 0x8000 ?
 		latch[0] <= 1;
 	 end
+  end
 end
 
 // debug led counter (samplerate 46875/65536=0.7 Hz)
@@ -113,31 +126,40 @@ reg [15:0] ym_clk_cnt = 0;
 // i2s output (todo)
 reg i2s_lrck;
 reg [17:0] i2s_data;
-reg i2s_data_out;
+reg [1:0] i2s_data_out = 2'b00;
 reg ym_data_out;
-always @(posedge ym_dclk) begin
+always @(posedge clk14) begin
+  if (ym_dclk_strobe) begin
     // right channel is latched
     if (latch[0]) begin
 			ym_clk_cnt <= ym_clk_cnt + 1;
-			i2s_data <= {data, 2'b00};
+			i2s_data <= {1'b0, data, 1'b0};
         i2s_lrck <= 1'b0;
     end
     // left channel is latched
     else if (latch[1]) begin
-		i2s_data <= {data, 2'b00};
+		i2s_data <= {1'b0, data, 1'b0};
       i2s_lrck <= 1'b1;
     end
     else begin
         i2s_data <= {i2s_data[16:0], 1'b0}; // shifting register
     end
-	 i2s_data_out <= i2s_data[17]; // delayed data out
+	 i2s_data_out <= {i2s_data_out[0], i2s_data[17]}; // delayed data out
 	 ym_data_out <= ym_data;
+  end
 end
 
-assign dac_bck = ~ym_dclk;
+// i2s clk
+reg i2s_clk;
+always @(posedge clk14) begin
+	if (ym_dclk_strobe) i2s_clk <= 0;
+	if (ym_dclk_strobe_n) i2s_clk <= 1;
+end
+
+assign dac_bck = i2s_clk;
 assign dac_lrck = i2s_lrck;
-assign dac_dat = (allow_lsb) ? ym_data_out : i2s_data_out;
-assign dac_std = allow_lsb;
+assign dac_dat = i2s_data_out[1];
+assign dac_std = 1'b0; // i2s
 
 assign led[0] = (allow_led0) ? allow_lsb : 1'b1;
 assign led[1] = (allow_led1) ? ~ym_clk_cnt[15] : 1'b1;
