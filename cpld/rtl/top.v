@@ -133,12 +133,12 @@ always @(posedge clk14) begin
     // right channel is latched
     if (latch[0]) begin
 			ym_clk_cnt <= ym_clk_cnt + 1;
-			i2s_data <= {1'b0, data, 1'b0};
+			i2s_data <= {data, 2'b00};
         i2s_lrck <= 1'b0;
     end
     // left channel is latched
     else if (latch[1]) begin
-		i2s_data <= {1'b0, data, 1'b0};
+		i2s_data <= {data, 2'b00};
       i2s_lrck <= 1'b1;
     end
     else begin
