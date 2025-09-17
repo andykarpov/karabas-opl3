@@ -8,7 +8,7 @@ Simple OPL3 sound card for ZX Spectrum (NemoBus).
 
 ### Tech specs
 
-* OPL3 sound by YM262-M
+* OPL3 sound by YMF-262-M
 * 16-bit DAC UDA1334A
 * EPM3128 CPLD
 * Low profile PCB: 98x64mm
@@ -16,7 +16,7 @@ Simple OPL3 sound card for ZX Spectrum (NemoBus).
 
 ### Changelog & current status
 
-* Rev.A - initial release. Please note the [errata](pcb/rev.A/ERRATA.txt);
+* Rev.A - initial release. Please note the [errata](pcb/revA/ERRATA.txt);
 
 ### Related projects
 
