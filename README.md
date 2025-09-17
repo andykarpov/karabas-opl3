@@ -1,6 +1,7 @@
 ## Karabas-OPL3
 
-Simple OPL3 sound card for ZX Spectrum (NemoBus).
+Simple OPL3 sound card for ZX Spectrum (NemoBus). 
+Inspired by a BomgeMoon soundcard :)
 
 [![photo](docs/karabas-opl3-top.png)](docs/karabas-opl3-top.png?raw=true)
 
@@ -20,6 +21,7 @@ Simple OPL3 sound card for ZX Spectrum (NemoBus).
 
 ### Related projects
 
+* BomgeMoon - [link](https://github.com/Kulicheg/BomgeMoon)
 * ZX-Multisound - [link](https://github.com/UzixLS/zx-multisound)
 * Turbo Sound FM - [link](http://www.nedopc.com/TURBOSOUND/ts-fm.php)
 * ZXM-SoundCard - [link](http://micklab.ru/My%20Soundcard/ZXMSoundCard.htm)
