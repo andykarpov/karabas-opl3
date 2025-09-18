@@ -13,7 +13,7 @@ release:
 	cp output/rev_A.pof ../../docs/karabas-opl3-revA.pof
 
 clean:
-	rm -rf db incremental_db output
+	rm -rf db incremental_db output *.ddb ${REVISION}_description.txt ${REVISION}.qws
 
 report:
 	cat output/${REVISION}.*.smsg output/${REVISION}.*.rpt |grep -e Error -e Critical -e Warning |grep -v -e "Family doesn't support jitter analysis" -e "Force Fitter to Avoid Periphery Placement Warnings"
