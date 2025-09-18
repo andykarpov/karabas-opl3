@@ -17,7 +17,8 @@ Inspired by a BomgeMoon soundcard :)
 
 ### Changelog & current status
 
-* Rev.A - initial release. Please note the [errata](pcb/revA/ERRATA.txt);
+* Rev.A - initial release
+* Rev.B - reduced pcb size, removed config switch
 
 ### Related projects
 
