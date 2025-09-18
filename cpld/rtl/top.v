@@ -11,11 +11,11 @@
 -- #             # #             # #               #             # #             # #             #               # 
 -- #             # ############### #               ############### ############### ############### ############### 
 --                                                                                                                 
---         ####### ####### ####### #######         ############### ############### #               ###############
---                                                 #             # #             # #                             #
---                                                 #             # ############### #               ###############    
---                                                 #             # #               #                             #
--- https://github.com/andykarpov/karabas-opl3      ############### #               ############### ###############
+--         ####### ####### ####### #######         ############### ############### #               ############### 
+--                                                 #             # #             # #                             # 
+--                                                 #             # ############### #               ############### 
+--                                                 #             # #               #                             # 
+-- https://github.com/andykarpov/karabas-opl3      ############### #               ############### ############### 
 --
 -- CPLD firmware for Karabas-OPL3 soundcard
 --
@@ -29,10 +29,10 @@ module karabas_opl3(
 
 	 // config bits
 	 // cfg[0]: clk source: 14 / 28 MHz
-	 // cfg[1]: i2s/lsb dac standart
-	 // cfg[2]: enable led0
-	 // cfg[3]: enable led1
-	 // cfg[4]: invert n_iorqge out 
+	 // cfg[1]: i2s/lsb dac standart (deprecated)
+	 // cfg[2]: enable led0 (deprecated)
+	 // cfg[3]: enable led1 (deprecated)
+	 // cfg[4]: invert n_iorqge out (deprecated)
     input wire [4:0] 	cfg,
 
 	 // bus signals
@@ -64,10 +64,10 @@ module karabas_opl3(
 
 // config 
 wire allow_clk_divide = ~cfg[0];
-wire allow_lsb = ~cfg[1];
-wire allow_led0 = ~cfg[2];
-wire allow_led1 = ~cfg[3];
-wire allow_invert_iorqe = ~cfg[4];
+wire allow_lsb = 1'b0; //~cfg[1];
+wire allow_led0 = 1'b1; //~cfg[2];
+wire allow_led1 = 1'b1; //~cfg[3];
+wire allow_invert_iorqe = 1'b0; //~cfg[4];
 
 // clock for ymf262-m (divided by 2)
 reg clk_div = 0;
@@ -159,7 +159,7 @@ end
 assign dac_bck = i2s_clk;
 assign dac_lrck = i2s_lrck;
 assign dac_dat = i2s_data_out[1];
-assign dac_std = 1'b0; // i2s
+assign dac_std = allow_lsb; // i2s
 
 assign led[0] = (allow_led0) ? allow_lsb : 1'b1;
 assign led[1] = (allow_led1) ? ~ym_clk_cnt[15] : 1'b1;
