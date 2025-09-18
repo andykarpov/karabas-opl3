@@ -19516,9 +19516,9 @@
 		(layer "Eco1.User")
 		(uuid "1eb073e3-8c82-4257-bb1d-0d5f53d3be16")
 		(pts
-			(xy 91.44 71.6) (xy 189.6 71.61)
+			(xy 97.35 92) (xy 189.429556 91.97)
 		)
-		(height -4.36)
+		(height -5.330466)
 		(format
 			(prefix "")
 			(suffix "")
@@ -19535,8 +19535,8 @@
 			(extension_offset 0.5)
 			(keep_text_aligned yes)
 		)
-		(gr_text "98.16 mm"
-			(at 140.520561 66.095 359.994163)
+		(gr_text "92.08 mm"
+			(at 143.387666 85.504534 0.01866726339)
 			(layer "Eco1.User")
 			(uuid "1eb073e3-8c82-4257-bb1d-0d5f53d3be16")
 			(effects
@@ -19552,9 +19552,9 @@
 		(layer "Eco1.User")
 		(uuid "3fd0d13f-9e90-4793-83aa-efdda9847d90")
 		(pts
-			(xy 89.79 100.02) (xy 89.79 127.5873)
+			(xy 89.75 111.5) (xy 89.79 127.5873)
 		)
-		(height 4.4)
+		(height 4.64)
 		(format
 			(prefix "")
 			(suffix "")
@@ -19571,8 +19571,8 @@
 			(extension_offset 0.5)
 			(keep_text_aligned yes)
 		)
-		(gr_text "27.57 mm"
-			(at 84.24 113.80365 90)
+		(gr_text "16.09 mm"
+			(at 86.28001 119.552328 270.1424618)
 			(layer "Eco1.User")
 			(uuid "3fd0d13f-9e90-4793-83aa-efdda9847d90")
 			(effects
@@ -19586,45 +19586,9 @@
 	(dimension
 		(type aligned)
 		(layer "Eco1.User")
-		(uuid "49db2ace-bc06-4be0-968e-1be00486f68e")
-		(pts
-			(xy 91.27 124.71) (xy 91.27 74.71)
-		)
-		(height -10.1)
-		(format
-			(prefix "")
-			(suffix "")
-			(units 3)
-			(units_format 1)
-			(precision 2)
-		)
-		(style
-			(thickness 0.1)
-			(arrow_length 1.27)
-			(text_position_mode 0)
-			(arrow_direction outward)
-			(extension_height 0.58642)
-			(extension_offset 0.5)
-			(keep_text_aligned yes)
-		)
-		(gr_text "50.00 mm"
-			(at 80.02 99.71 90)
-			(layer "Eco1.User")
-			(uuid "49db2ace-bc06-4be0-968e-1be00486f68e")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-	)
-	(dimension
-		(type aligned)
-		(layer "Eco1.User")
 		(uuid "4f876ca0-e10b-4388-bf7b-d0f2cd69791e")
 		(pts
-			(xy 91.41 127.56) (xy 106.15 127.57)
+			(xy 97.35 127.56) (xy 106.15 127.57)
 		)
 		(height 13.43)
 		(format
@@ -19643,8 +19607,8 @@
 			(extension_offset 0.5)
 			(keep_text_aligned yes)
 		)
-		(gr_text "14.74 mm"
-			(at 98.771669 139.844997 359.9611291)
+		(gr_text "8.80 mm"
+			(at 101.736046 139.844992 359.9348912)
 			(layer "Eco1.User")
 			(uuid "4f876ca0-e10b-4388-bf7b-d0f2cd69791e")
 			(effects
@@ -19660,9 +19624,9 @@
 		(layer "Eco1.User")
 		(uuid "65f66861-0780-4d5f-9a7d-dc9415273e32")
 		(pts
-			(xy 84.34 127.57) (xy 84.34 71.6)
+			(xy 84.34 127.57) (xy 84.3 91.7)
 		)
-		(height -10.6)
+		(height -4.978268)
 		(format
 			(prefix "")
 			(suffix "")
@@ -19679,8 +19643,8 @@
 			(extension_offset 0.5)
 			(keep_text_aligned yes)
 		)
-		(gr_text "55.97 mm"
-			(at 72.59 99.585 90)
+		(gr_text "35.87 mm"
+			(at 80.491734 109.639269 -89.93610733)
 			(layer "Eco1.User")
 			(uuid "65f66861-0780-4d5f-9a7d-dc9415273e32")
 			(effects
@@ -19732,9 +19696,9 @@
 		(layer "Eco1.User")
 		(uuid "cee26ed0-cbd1-4838-9214-056f36551155")
 		(pts
-			(xy 72.99 71.66) (xy 104.88 135.62)
+			(xy 78.850007 91.71182) (xy 95.15 135.62)
 		)
-		(height -14.4)
+		(height -4.550007)
 		(orientation 1)
 		(format
 			(prefix "")
@@ -19752,8 +19716,8 @@
 			(extension_offset 0.5)
 			(keep_text_aligned yes)
 		)
-		(gr_text "63.96 mm"
-			(at 57.44 103.64 90)
+		(gr_text "43.91 mm"
+			(at 73.15 113.66591 90)
 			(layer "Eco1.User")
 			(uuid "cee26ed0-cbd1-4838-9214-056f36551155")
 			(effects
