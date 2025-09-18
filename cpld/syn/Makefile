@@ -1,13 +1,16 @@
 REV = A
 REVISION = rev_${REV}
 
-.PHONY: build program clean
+.PHONY: build program release clean
 
 build:
 	quartus_sh --no_banner --flow compile karabas_opl3 -c ${REVISION}
 
 program:
 	quartus_pgm --no_banner --mode=jtag -o "BVP;output/${REVISION}.pof"
+
+release:
+	cp output/rev_A.pof ../../docs/karabas-opl3-revA.pof
 
 clean:
 	rm -rf db incremental_db output
