@@ -27,27 +27,27 @@ module karabas_opl3(
     // master clock
     input wire            clk28,
 
-     // config bits
-     // cfg[0]: clk source: 14 / 28 MHz
-     // cfg[1]: i2s/lsb dac standart (deprecated)
-     // cfg[2]: enable led0 (deprecated)
-     // cfg[3]: enable led1 (deprecated)
-     // cfg[4]: invert n_iorqge out (deprecated)
+    // config bits
+    // cfg[0]: clk source: 14 / 28 MHz
+    // cfg[1]: i2s/lsb dac standart (deprecated)
+    // cfg[2]: enable led0 (deprecated)
+    // cfg[3]: enable led1 (deprecated)
+    // cfg[4]: invert n_iorqge out (deprecated)
     input wire [4:0]      cfg,
 
-     // bus signals
+    // bus signals
     input wire            n_rst,
     input wire [9:0]      a,
     input wire            n_iorq,
     input wire            n_m1,
 
-     // ymf262-m control signals
+    // ymf262-m control signals
     output wire           n_iorqge,
     output wire           n_ym_cs,
     output wire [1:0]     ym_a,
     output wire           clk14,
 
-     // ymf262-m sound stream
+    // ymf262-m sound stream
     input wire [1:0]      ym_smp,
     input wire            ym_data,
     input wire            ym_dclk,
@@ -56,10 +56,10 @@ module karabas_opl3(
     output wire           dac_bck,
     output wire           dac_lrck,
     output wire           dac_dat,
-     output wire          dac_std,
+    output wire           dac_std,
 
-     // debug leds
-     output wire [1:0]    led
+    // debug leds
+    output wire [1:0]     led
 );
 
 // config 
@@ -86,21 +86,19 @@ assign n_iorqge = (allow_invert_iorqe) ? n_m1 & port_cs : ~(n_m1 & port_cs);
 // regster addresses
 assign ym_a[1:0] = a[1:0];
 
-// sample ym data in main clock domain
+// sample ym_dclk in main clock domain
 reg [2:0] ym_dclk_r = 0;
 wire ym_dclk_strobe, ym_dclk_strobe_n;
 always @(posedge clk14)
 begin
     ym_dclk_r <= {ym_dclk_r[1:0], ym_dclk};
 end
-
 assign ym_dclk_strobe = (ym_dclk_r[2:1] == 2'b01) ? 1'b1 : 1'b0; // rising edge 
 assign ym_dclk_strobe_n = (ym_dclk_r[2:1] == 2'b10) ? 1'b1 : 1'b0; // falling edge
 
 // convert data stream for i2s from lsb-first to msb-first
 reg [1:0] prev_smp;
-reg [15:0] data;
-reg [15:0] serial;
+reg [15:0] data, serial;
 reg [1:0] latch;
 always @(posedge clk14) begin
   if (ym_dclk_strobe) begin
@@ -120,9 +118,9 @@ always @(posedge clk14) begin
   end
 end
 
-// i2s output (todo)
+// i2s output
 reg i2s_lrck;
-reg [17:0] i2s_data;
+reg [17:0] i2s_data; // extra 2 bits, because ymf-262 doing that between sampling
 reg [1:0] i2s_data_out = 2'b00;
 always @(posedge clk14) begin
   if (ym_dclk_strobe) begin
@@ -150,11 +148,13 @@ always @(posedge clk14) begin
     if (ym_dclk_strobe_n) i2s_clk <= 1;
 end
 
+// dac outputs
 assign dac_bck  = i2s_clk;
 assign dac_lrck = i2s_lrck;
 assign dac_dat  = i2s_data_out[1];
 assign dac_std  = allow_lsb; // always i2s
 
+// debug leds
 assign led[0]   = (allow_led0) ? allow_clk_divide : 1'b1;
 assign led[1]   = (allow_led1) ? allow_lsb : 1'b1;
 
