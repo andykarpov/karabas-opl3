@@ -25,41 +25,41 @@
 
 module karabas_opl3(
     // master clock
-    input wire 			clk28,
+    input wire            clk28,
 
-	 // config bits
-	 // cfg[0]: clk source: 14 / 28 MHz
-	 // cfg[1]: i2s/lsb dac standart (deprecated)
-	 // cfg[2]: enable led0 (deprecated)
-	 // cfg[3]: enable led1 (deprecated)
-	 // cfg[4]: invert n_iorqge out (deprecated)
-    input wire [4:0] 	cfg,
+     // config bits
+     // cfg[0]: clk source: 14 / 28 MHz
+     // cfg[1]: i2s/lsb dac standart (deprecated)
+     // cfg[2]: enable led0 (deprecated)
+     // cfg[3]: enable led1 (deprecated)
+     // cfg[4]: invert n_iorqge out (deprecated)
+    input wire [4:0]      cfg,
 
-	 // bus signals
-    input wire 			n_rst,
-    input wire [9:0] 	a,
-    input wire 			n_iorq,
-    input wire 			n_m1,
+     // bus signals
+    input wire            n_rst,
+    input wire [9:0]      a,
+    input wire            n_iorq,
+    input wire            n_m1,
 
-	 // ymf262-m control signals
-    output wire 			n_iorqge,
-    output wire 			n_ym_cs,
-    output wire [1:0] 	ym_a,
-    output wire 			clk14,
+     // ymf262-m control signals
+    output wire           n_iorqge,
+    output wire           n_ym_cs,
+    output wire [1:0]     ym_a,
+    output wire           clk14,
 
-	 // ymf262-m sound stream
-    input wire [1:0] 	ym_smp,
-    input wire 			ym_data,
-    input wire 			ym_dclk,
+     // ymf262-m sound stream
+    input wire [1:0]      ym_smp,
+    input wire            ym_data,
+    input wire            ym_dclk,
 
     // output dac stream
-    output wire 			dac_bck,
-    output wire 			dac_lrck,
-    output wire 			dac_dat,
-	 output wire 			dac_std,
+    output wire           dac_bck,
+    output wire           dac_lrck,
+    output wire           dac_dat,
+     output wire          dac_std,
 
-	 // debug leds
-	 output wire [1:0] 	led
+     // debug leds
+     output wire [1:0]    led
 );
 
 // config 
@@ -91,7 +91,7 @@ reg [2:0] ym_dclk_r = 0;
 wire ym_dclk_strobe, ym_dclk_strobe_n;
 always @(posedge clk14)
 begin
-	ym_dclk_r <= {ym_dclk_r[1:0], ym_dclk};
+    ym_dclk_r <= {ym_dclk_r[1:0], ym_dclk};
 end
 
 assign ym_dclk_strobe = (ym_dclk_r[2:1] == 2'b01) ? 1'b1 : 1'b0; // rising edge 
@@ -104,64 +104,58 @@ reg [15:0] serial;
 reg [1:0] latch;
 always @(posedge clk14) begin
   if (ym_dclk_strobe) begin
-	 latch <= 2'b00;
-    prev_smp <= ym_smp;
-	 serial <= {ym_data, serial[15:1]};
-	 if (prev_smp[0] & ~ym_smp[0]) // latch smp0 on falling edge
-	 begin
-		data <= serial; // todo minus 0x8000 ?
-		latch[1] <= 1;
-	 end
-	 else if (prev_smp[1] & ~ym_smp[1]) // latch smp1
-	 begin
-		data <= serial; // todo minus 0x8000 ?
-		latch[0] <= 1;
-	 end
+     latch <= 2'b00;
+     prev_smp <= ym_smp;
+     serial <= {ym_data, serial[15:1]};
+     if (prev_smp[0] & ~ym_smp[0]) // latch smp0 on falling edge
+     begin
+        data <= serial; // todo minus 0x8000 ?
+        latch[1] <= 1;
+     end
+     else if (prev_smp[1] & ~ym_smp[1]) // latch smp1
+     begin
+        data <= serial; // todo minus 0x8000 ?
+        latch[0] <= 1;
+     end
   end
 end
-
-// debug led counter (samplerate 46875/65536=0.7 Hz)
-reg [15:0] ym_clk_cnt = 0;
 
 // i2s output (todo)
 reg i2s_lrck;
 reg [17:0] i2s_data;
 reg [1:0] i2s_data_out = 2'b00;
-reg ym_data_out;
 always @(posedge clk14) begin
   if (ym_dclk_strobe) begin
     // right channel is latched
     if (latch[0]) begin
-			ym_clk_cnt <= ym_clk_cnt + 1;
-			i2s_data <= {data, 2'b00};
+        i2s_data <= {data, 2'b00};
         i2s_lrck <= 1'b0;
     end
     // left channel is latched
     else if (latch[1]) begin
-		i2s_data <= {data, 2'b00};
-      i2s_lrck <= 1'b1;
+        i2s_data <= {data, 2'b00};
+        i2s_lrck <= 1'b1;
     end
     else begin
         i2s_data <= {i2s_data[16:0], 1'b0}; // shifting register
     end
-	 i2s_data_out <= {i2s_data_out[0], i2s_data[17]}; // delayed data out
-	 ym_data_out <= ym_data;
+    i2s_data_out <= {i2s_data_out[0], i2s_data[17]}; // delayed data out
   end
 end
 
 // i2s clk
 reg i2s_clk;
 always @(posedge clk14) begin
-	if (ym_dclk_strobe) i2s_clk <= 0;
-	if (ym_dclk_strobe_n) i2s_clk <= 1;
+    if (ym_dclk_strobe) i2s_clk <= 0;
+    if (ym_dclk_strobe_n) i2s_clk <= 1;
 end
 
-assign dac_bck = i2s_clk;
+assign dac_bck  = i2s_clk;
 assign dac_lrck = i2s_lrck;
-assign dac_dat = i2s_data_out[1];
-assign dac_std = allow_lsb; // i2s
+assign dac_dat  = i2s_data_out[1];
+assign dac_std  = allow_lsb; // always i2s
 
-assign led[0] = (allow_led0) ? allow_lsb : 1'b1;
-assign led[1] = (allow_led1) ? ~ym_clk_cnt[15] : 1'b1;
+assign led[0]   = (allow_led0) ? allow_clk_divide : 1'b1;
+assign led[1]   = (allow_led1) ? allow_lsb : 1'b1;
 
 endmodule
