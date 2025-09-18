@@ -63,7 +63,7 @@ module karabas_opl3(
 );
 
 // config 
-wire allow_clk_divide = ~cfg[0];
+wire allow_clk_divide = cfg[0]; // pullup by default (=1) means - 28 MHz osc, needs to be divided 
 wire allow_lsb = 1'b0; //~cfg[1];
 wire allow_led0 = 1'b1; //~cfg[2];
 wire allow_led1 = 1'b1; //~cfg[3];
@@ -155,7 +155,7 @@ assign dac_dat  = i2s_data_out[1];
 assign dac_std  = allow_lsb; // always i2s
 
 // debug leds
-assign led[0]   = (allow_led0) ? allow_clk_divide : 1'b1;
+assign led[0]   = (allow_led0) ? ~allow_clk_divide : 1'b1;
 assign led[1]   = (allow_led1) ? allow_lsb : 1'b1;
 
 endmodule

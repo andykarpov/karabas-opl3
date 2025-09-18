@@ -17,7 +17,7 @@ wire dac_std;
 /* top level module instance to test */
 karabas_opl3 karabas_opl3(
     .clk28(clk28),
-    .cfg(5'b11110),
+    .cfg(5'b11111),
     .n_rst(rst_n),
     .a(10'b0),
     .n_iorq(1'b1),
