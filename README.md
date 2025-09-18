@@ -12,7 +12,7 @@ Inspired by a BomgeMoon soundcard :)
 * OPL3 sound by YMF-262-M
 * 16-bit DAC UDA1334A
 * EPM3128 CPLD
-* Low profile PCB: 98x64mm
+* Low profile PCB: 92x44mm
 * 5V only power required
 
 ### Changelog & current status
